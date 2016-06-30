@@ -170,13 +170,15 @@
 \index{bound Compton scattering}
 \index{IBCMP}
 \begin{verbatim}
-       Bound Compton scattering=  On (default), Off or Simple
+       Bound Compton scattering=  On, Off, Simple or norej (default)
                         If Off, Compton scattering will be treated with
                         Klein-Nishina, with On Compton scattering is
-                        treated in the Impulse approximation. 
-                        With Simple, the impulse approximation incoherent 
+                        treated in the Impulse approximation.
+                        With Simple, the impulse approximation incoherent
                         scattering function will be used (i.e., no Doppler
-                        broadenning). 
+                        broadenning). With norej the actual total bound
+                        Compton cross section is used and there are no
+                        rejections at run time.
                         Make sure to turn on for low energy applications,
                         not necessary above, say, 1 MeV.
                         [ IBCMP ]
@@ -198,13 +200,18 @@
 \index{eii\_flag}
 \begin{verbatim}
        Electron Impact Ionization= Off (default), On, casnati, kolbenstvedt,
-                        gryzinski.  If set to On, then use Kawrakow's theory
-                        to derive EII cross-sections.  If set to casnati, then
-                        use the cross-sections of Casnati (contained in the
-                        file ($HEN_HOUSE/data/eii_casnati.data).  Similar for
-                        kolbenstvedt and gryzinski. This is only of interest 
-                        in keV X-ray calculations.
-                        [ eii_flag ]
+                        gryzinski or penelope.  If set to On or ik, then
+                        use Kawrakow's theory to derive EII cross-sections.
+                        If set to casnati, then use the cross-sections of
+                        Casnati (from file ($HEN_HOUSE/data/eii_casnati.data).
+                        Similar for kolbenstvedt, gryzinski and penelope.
+                        This is only of interest in kV X-ray calculations.
+                        Note that the user can supply their own EII
+                        cross-section data as well. The requirement is that
+                        the file eii_suffix.data exists in the $HEN_HOUSE/data
+                        directory, where suffix is the name specified.
+                        Entry is case-sensitive except for Off, On or ik.
+                        [ eii_flag, eii_xfile ]
 \end{verbatim}
 \index{pair angular sampling}
 \index{IPRDST}
@@ -249,6 +256,7 @@
                         photon_xsections_rayleigh.data exist in the
                         $HEN_HOUSE/data directory, where photon_xsections
                         is the name specified.
+                        Entry is case-sensitive except for the pegs4 option.
                         [ photon_xsections ]
 \end{verbatim}
 \index{photon cross sections!output}
@@ -271,6 +279,20 @@
                         (see below).  The default file (ie in the absence
                         of any user-supplied data) is compton_sigma.data.
                         [ comp_xsections ]
+\end{verbatim}
+\index{Rayleigh scattering}
+\index{Rayleigh scattering!custom form factors}
+\index{IRAYLR}
+\begin{verbatim}
+       Rayleigh scattering= Off, On, custom
+                        If On, turned on coherent (Rayleigh) scattering.
+                        Default is Off. Should be turned on for low energy
+                        applications. If custom, user must provide media names
+                        and form factor files for each desired medium. The
+                        rest of the media use the default atomic form factors.
+                        Not set to On by default for historical reasons since
+                        a PEGS4 data set is not required anymore.
+                        [ IRAYLR ]
 \end{verbatim}
 \index{iray\_ff\_media}
 \begin{verbatim}
@@ -308,17 +330,6 @@
                         in a low energy photon beam.
                         Default is On
                         [ IPHTER ]
-\end{verbatim}
-\index{Rayleigh scattering}
-\index{Rayleigh scattering!custom form factors}
-\index{IRAYLR}
-\begin{verbatim}
-       Rayleigh scattering= Off, On, custom
-                        If On, turned on coherent (Rayleigh) scattering.
-                        Default is Off. Should be turned on for low energy
-                        applications. Not set to On by default because 
-                        On requires a special PEGS4 data set
-                        [ IRAYLR ]
 \end{verbatim}
 \index{atomic relaxations}
 \index{IEDGFL}
